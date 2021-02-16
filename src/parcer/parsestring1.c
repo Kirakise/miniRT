@@ -20,10 +20,10 @@ int		parseres(char *s)
 	g_data.sheight = ft_atoi(&s);
 	if (g_data.swidth < 1 || g_data.sheight < 1)
 		return (-1);
-	if (g_data.swidth > 1920)
-		g_data.swidth = 1920;
-	if (g_data.sheight > 1080)
-		g_data.sheight = 1080;
+	if (g_data.swidth > 2560)
+		g_data.swidth = 2560;
+	if (g_data.sheight > 1440)
+		g_data.sheight = 1395;
 	return (1);
 }
 
