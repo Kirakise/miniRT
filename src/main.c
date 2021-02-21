@@ -6,7 +6,7 @@
 /*   By: rcaraway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 18:30:37 by rcaraway          #+#    #+#             */
-/*   Updated: 2021/02/14 20:40:33 by rcaraway         ###   ########.fr       */
+/*   Updated: 2021/02/21 18:50:55 by rcaraway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	main(int args, char **argv)
 {
 	if (!initialize())
 		return (-1);
-	if (!ft_strcmp(argv[1], "--save"))
+	if (argv[1] && !ft_strcmp(argv[1], "--save"))
 		g_data.save = 1;
-	if (args > 2 + g_data.save || checkfilename(argv[1 + g_data.save])
-	|| parsefile(argv[1 + g_data.save]) == -1 || args <= 1)
+	if (args != 2 + g_data.save || checkfilename(argv[1 + g_data.save])
+			|| parsefile(argv[1 + g_data.save]) == -1)
 	{
 		ft_putstr("Error with scene\n");
 		return (-1);
