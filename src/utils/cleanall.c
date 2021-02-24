@@ -25,7 +25,6 @@ void	cleanall(void)
 		o = next;
 		next = next->next;
 	}
-	free(o);
 	cleanall2();
 }
 
@@ -62,8 +61,6 @@ void	cleanall3(void)
 	free(l);
 	if (g_data.mlx.mlx)
 		free(g_data.mlx.mlx);
-	if (g_data.mlx.win)
-		free(g_data.mlx.win);
 }
 
 int		checkcolor(t_color c)

@@ -6,7 +6,7 @@
 /*   By: rcaraway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:40:45 by rcaraway          #+#    #+#             */
-/*   Updated: 2021/02/14 17:58:42 by rcaraway         ###   ########.fr       */
+/*   Updated: 2021/02/24 19:26:39 by rcaraway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,12 @@ void	*ft_calloc(int size1, int size2)
 	while (--i >= 0)
 		s[i] = 0;
 	return (s);
+}
+
+int		ft_isspace(char s)
+{
+	if (s == '\t' || s == ' ')
+		return (1);
+	else
+		return (0);
 }

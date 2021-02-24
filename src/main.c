@@ -63,7 +63,8 @@ int	main(int args, char **argv)
 	if (args == 3 && !ft_strcmp(argv[2], "--save"))
 		g_data.save = 1;
 	if (args != 2 + g_data.save || checkfilename(argv[1])
-			|| parsefile(argv[1]) == -1)
+			|| parsefile(argv[1]) == -1 || g_data.swidth < 1
+			|| g_data.alratio == -1 || !(g_data.cams->next))
 	{
 		ft_putstr("Error with scene\n");
 		return (-1);
@@ -72,7 +73,10 @@ int	main(int args, char **argv)
 	g_data.camcur = g_data.cams->next;
 	get_image(g_data.cams->next);
 	if (g_data.save)
+	{
+		cleanall();
 		return (0);
+	}
 	mlx_hook(g_data.mlx.win, 2, 1L << 0, closewin, &(g_data.mlx));
 	mlx_hook(g_data.mlx.win, 17, 0L, closewin2, 0);
 	mlx_loop(g_data.mlx.mlx);

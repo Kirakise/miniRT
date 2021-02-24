@@ -34,7 +34,7 @@ int		parseplane(char *s)
 	p->color.r = ft_atoi(&s);
 	p->color.g = ft_atoi(&s);
 	p->color.b = ft_atoi(&s);
-	if (vectormodule(&p->v) != 1 || checkcolor(p->color))
+	if (checkcolor(p->color) || !vectormodule(&p->v))
 		return (-1);
 	normvector(&p->v);
 	return (1);
@@ -57,13 +57,12 @@ int		parsesquare(char *s)
 	o->type = 3;
 	readpoint(&sq->pc, &s);
 	readvector(&sq->v, &s);
-	if (vectormodule(&sq->v) != 1)
-		return (-1);
-	normvector(&sq->v);
 	sq->side = ft_atoi_double(&s);
 	readcolor(&sq->color, &s);
-	if (checkcolor(sq->color) || sq->side <= 0)
+	if (checkcolor(sq->color) || sq->side <= 0
+	|| !vectormodule(&sq->v))
 		return (-1);
+	normvector(&sq->v);
 	rotatesquareinit(sq);
 	return (1);
 }
@@ -85,14 +84,13 @@ int		parsecylinder(char *s)
 	o->obj = c;
 	readpoint(&c->p, &s);
 	readvector(&c->v, &s);
-	if (vectormodule(&c->v) != 1)
-		return (-1);
-	normvector(&c->v);
 	c->radius = ft_atoi_double(&s) / 2;
 	c->height = ft_atoi_double(&s);
 	readcolor(&c->color, &s);
-	if (checkcolor(c->color) || c->height <= 0 || c->radius <= 0)
+	if (checkcolor(c->color) || c->height <= 0 || c->radius <= 0
+	|| !vectormodule(&c->v))
 		return (-1);
+	normvector(&c->v);
 	return (1);
 }
 

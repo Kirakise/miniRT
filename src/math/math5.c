@@ -26,7 +26,6 @@ double		checkcylinder(t_line *l, t_cylinder *c)
 		tmp = -1;
 	angle1 = c->v.y != 0 ? tmp * atan(c->v.y / c->v.z) : 0;
 	angle2 = c->v.x != 0 ? tmp * asin((c->v.x) / vectormodule(&(c->v))) : 0;
-	foo();
 	rotatecylinder(c, angle1, angle2);
 	rotateline(l, angle1, angle2);
 	res = checkcylinder2(l, c);

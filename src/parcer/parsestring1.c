@@ -54,11 +54,8 @@ int		parsecam(char *s)
 	c = c->next;
 	readpoint(&c->p, &s);
 	readvector(&c->v, &s);
-	foo();
 	c->fow = ft_atoi(&s);
-	if (c->fow >= 180 || c->fow < 1)
-		return (-1);
-	if (vectormodule(&c->v) != 1)
+	if (c->fow >= 180 || c->fow < 1 || !vectormodule(&c->v))
 		return (-1);
 	normvector(&c->v);
 	return (1);

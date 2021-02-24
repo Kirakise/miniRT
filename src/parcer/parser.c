@@ -33,6 +33,7 @@ int		parsefile(char *s)
 			free(s1);
 			return (-1);
 		}
+		free(s1);
 	}
 	parseline(s1);
 	free(s1);
@@ -41,23 +42,23 @@ int		parsefile(char *s)
 
 int		parseline(char *s)
 {
-	if (s[0] == 'R')
+	if (s[0] == 'R' && ft_isspace(s[1]))
 		return (parseres(s + 1));
-	else if (s[0] == 'A')
+	else if (s[0] == 'A' && ft_isspace(s[1]))
 		return (parseamb(s + 1));
-	else if (s[0] == 'c' && s[1] != 'y')
+	else if (s[0] == 'c' && ft_isspace(s[1]))
 		return (parsecam(s + 1));
-	else if (s[0] == 'l')
+	else if (s[0] == 'l' && ft_isspace(s[1]))
 		return (parselight(s + 1));
-	else if (s[0] == 's' && s[1] == 'p')
+	else if (s[0] == 's' && s[1] == 'p' && ft_isspace(s[2]))
 		return (parsesphere(s + 2));
-	if (s[0] == 'p')
+	if (s[0] == 'p' && s[1] == 'l' && ft_isspace(s[2]))
 		return (parseplane(s + 2));
-	if (s[0] == 's' && s[1] == 'q')
+	if (s[0] == 's' && s[1] == 'q' && ft_isspace(s[2]))
 		return (parsesquare(s + 2));
-	if (s[0] == 'c' && s[1] == 'y')
+	if (s[0] == 'c' && s[1] == 'y' && ft_isspace(s[2]))
 		return (parsecylinder(s + 2));
-	if (s[0] == 't')
+	if (s[0] == 't' && s[1] == 'r' && ft_isspace(s[2]))
 		return (parsetriangle(s + 2));
 	return (-1);
 }

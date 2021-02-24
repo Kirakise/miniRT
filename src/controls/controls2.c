@@ -26,6 +26,7 @@ void	rotateobj(t_obj *o, double angle)
 int		closewin2(int a)
 {
 	mlx_destroy_window(g_data.mlx.mlx, g_data.mlx.win);
+	cleanall();
 	exit(a);
 	return (0);
 }
