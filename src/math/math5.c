@@ -24,12 +24,13 @@ double		checkcylinder(t_line *l, t_cylinder *c)
 	tmp = 1;
 	if (c->v.z < 0)
 		tmp = -1;
+	foo();
 	angle1 = c->v.y != 0 ? tmp * atan(c->v.y / c->v.z) : 0;
 	angle2 = c->v.x != 0 ? tmp * asin((c->v.x) / vectormodule(&(c->v))) : 0;
 	rotatecylinder(c, angle1, angle2);
 	rotateline(l, angle1, angle2);
 	res = checkcylinder2(l, c);
-	rotatecylinder(c, -angle1, -angle2);
+	*c = ctmp;
 	rotateline(l, -angle1, -angle2);
 	return (res);
 }
