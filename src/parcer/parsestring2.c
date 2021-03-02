@@ -20,7 +20,7 @@ int		parseplane(char *s)
 	t_obj	*o;
 
 	p = malloc(sizeof(struct s_plane));
-	if (!p)
+	if (!p || countargs(s) != 9)
 		return (-1);
 	o = g_data.objects;
 	while (o->next)
@@ -46,7 +46,7 @@ int		parsesquare(char *s)
 	t_obj		*o;
 
 	sq = malloc(sizeof(struct s_square));
-	if (!sq)
+	if (!sq || countargs(s) != 10)
 		return (-1);
 	o = g_data.objects;
 	while (o->next)
@@ -73,7 +73,7 @@ int		parsecylinder(char *s)
 	t_obj		*o;
 
 	c = malloc(sizeof(struct s_cylinder));
-	if (!c)
+	if (!c || countargs(s) != 11)
 		return (-1);
 	o = g_data.objects;
 	while (o->next)
@@ -100,7 +100,7 @@ int		parsetriangle(char *s)
 	t_obj		*o;
 
 	t = malloc(sizeof(struct s_triangle));
-	if (!t)
+	if (!t || countargs(s) != 12)
 		return (-1);
 	o = g_data.objects;
 	while (o->next)
