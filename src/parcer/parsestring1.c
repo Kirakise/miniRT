@@ -6,7 +6,7 @@
 /*   By: rcaraway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:39:09 by rcaraway          #+#    #+#             */
-/*   Updated: 2021/02/09 18:39:10 by rcaraway         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:21:44 by rcaraway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int		parseres(char *s)
 	g_data.sheight = ft_atoi(&s);
 	if (g_data.swidth < 1 || g_data.sheight < 1)
 		return (-1);
-	if (g_data.swidth > 5120)
-		g_data.swidth = 5120;
-	if (g_data.sheight > 2880)
-		g_data.sheight = 2845;
+	if (g_data.swidth > 2560)
+		g_data.swidth = 2560;
+	if (g_data.sheight > 1440)
+		g_data.sheight = 1395;
 	return (1);
 }
 
