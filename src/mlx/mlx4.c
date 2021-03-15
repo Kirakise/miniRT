@@ -6,13 +6,33 @@
 /*   By: rcaraway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:35:01 by rcaraway          #+#    #+#             */
-/*   Updated: 2021/02/09 20:27:48 by rcaraway         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:30:35 by rcaraway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ultimate.h"
 
-int		checkobjects(t_line *l)
+t_vector	mulvec(int i, t_vector v)
+{
+	v.x *= i;
+	v.y *= i;
+	v.z *= i;
+	normvector(&v);
+	return (v);
+}
+
+int			getangle2(t_vector *v1, t_vector *v2)
+{
+	double a1;
+	double a2;
+
+	a1 = v1->x * v2->x + v1->y * v2->y + v1->z * v2->z;
+	a2 = sqrt(v1->x * v1->x + v1->y * v1->y + v1->z * v1->z)
+		* sqrt(v2->x * v2->x + v2->y * v2->y + v2->z * v2->z);
+	return (a1 / a2 > 0 ? 1 : -1);
+}
+
+int			checkobjects(t_line *l)
 {
 	t_obj		*o;
 	t_result	res;
@@ -39,7 +59,7 @@ int		checkobjects(t_line *l)
 	return (color_to_int(&res.color));
 }
 
-void	checkobjects2(t_line *l, t_obj *o, t_result *res)
+void		checkobjects2(t_line *l, t_obj *o, t_result *res)
 {
 	double	tmp;
 	t_line	l1;
@@ -58,14 +78,14 @@ void	checkobjects2(t_line *l, t_obj *o, t_result *res)
 	&& tmp > 60 / g_data.camcur->fow && myequal(tmp, res->res)
 	== -1 && (res->res = tmp))
 	{
-		res->v = getvectorfromplane(*(t_plane *)o->obj);
+		res->v = getnormplane(((t_plane *)o->obj)->v, l);
 		res->color = ((t_plane *)o->obj)->color;
 	}
 	else
 		checkobjects3(l, o, res);
 }
 
-void	checkobjects3(t_line *l, t_obj *o, t_result *res)
+void		checkobjects3(t_line *l, t_obj *o, t_result *res)
 {
 	double	tmp;
 
@@ -80,14 +100,14 @@ void	checkobjects3(t_line *l, t_obj *o, t_result *res)
 	&& tmp > 60 / g_data.camcur->fow && myequal(tmp, res->res)
 	== -1 && (res->res = tmp))
 	{
-		res->v = ((t_triangle *)o->obj)->v;
+		res->v = getnormplane(((t_triangle *)o->obj)->v, l);
 		res->color = ((t_triangle *)o->obj)->color;
 	}
 	else if (o->type == 3 && !isnan(tmp = checksquare(l, o->obj))
 			&& tmp > 60 / g_data.camcur->fow && myequal(tmp, res->res)
 			== -1 && (res->res = tmp))
 	{
-		res->v = ((t_square *)o->obj)->v;
+		res->v = getnormplane(((t_square *)o->obj)->v, l);
 		res->color = ((t_square *)o->obj)->color;
 	}
 }

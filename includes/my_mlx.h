@@ -38,4 +38,7 @@ void				resizeobj(t_obj *o, double d);
 void				rotateobj(t_obj *o, double angle);
 void				addcres(t_cres *c, t_color co, double brightness);
 void				initcres(t_cres *c, t_color co, double bright);
+t_vector			mulvec(int i, t_vector v);
+int					getangle2(t_vector *v1, t_vector *v2);
+t_vector			getnormplane(t_vector v, t_line *l);
 #endif

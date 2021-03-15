@@ -37,6 +37,7 @@ void	addlight(t_color *c, t_vector v, t_point *p, t_vector vv)
 	t_line		tmp;
 	t_vector	vtmp;
 	t_cres		result;
+	t_line		bmp;
 
 	initcres(&result, g_data.alcolor, g_data.alratio);
 	l = g_data.lights->next;
@@ -45,6 +46,7 @@ void	addlight(t_color *c, t_vector v, t_point *p, t_vector vv)
 		tmp = makelinep(p, &(l->p));
 		vtmp = getvectorofline(&tmp);
 		tmp = makelinep(&(l->p), p);
+		bmp = makelinep(&g_data.camcur->p, &l->p);
 		if (checkinter(&tmp, p) && (cos(getangle(&v, &vtmp)) > 0))
 		{
 			addcres(&result, l->color, cos(getangle(&v, &vtmp))
