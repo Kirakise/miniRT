@@ -6,7 +6,7 @@
 /*   By: rcaraway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:39:09 by rcaraway          #+#    #+#             */
-/*   Updated: 2021/02/09 18:39:10 by rcaraway         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:21:44 by rcaraway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		parseres(char *s)
 {
-	if (g_data.swidth > 0 || g_data.sheight > 0)
+	if (g_data.swidth > 0 || g_data.sheight > 0
+	|| countargs(s + 1) != 2)
 		return (-1);
 	g_data.swidth = ft_atoi(&s);
 	g_data.sheight = ft_atoi(&s);
@@ -30,7 +31,8 @@ int		parseres(char *s)
 int		parseamb(char *s)
 {
 	if (g_data.alratio != -1 || g_data.alcolor.r != -1 ||
-		g_data.alcolor.g != -1 || g_data.alcolor.b != -1)
+		g_data.alcolor.g != -1 || g_data.alcolor.b != -1 ||
+		countargs(s) != 4)
 		return (-1);
 	g_data.alratio = ft_atoi_double(&s);
 	g_data.alcolor.r = ft_atoi(&s);
@@ -49,16 +51,13 @@ int		parsecam(char *s)
 	c = g_data.cams;
 	while (c->next)
 		c = c->next;
-	if (!(c->next = camconst()))
+	if (!(c->next = camconst()) || countargs(s) != 7)
 		return (-1);
 	c = c->next;
 	readpoint(&c->p, &s);
 	readvector(&c->v, &s);
-	foo();
 	c->fow = ft_atoi(&s);
-	if (c->fow >= 180 || c->fow < 1)
-		return (-1);
-	if (vectormodule(&c->v) != 1)
+	if (c->fow >= 180 || c->fow < 1 || !vectormodule(&c->v))
 		return (-1);
 	normvector(&c->v);
 	return (1);
@@ -71,7 +70,7 @@ int		parselight(char *s)
 	l = g_data.lights;
 	while (l->next)
 		l = l->next;
-	if (!(l->next = lightconst()))
+	if (!(l->next = lightconst()) || countargs(s) != 7)
 		return (-1);
 	l = l->next;
 	readpoint(&l->p, &s);
@@ -91,7 +90,7 @@ int		parsesphere(char *s)
 	o = g_data.objects;
 	while (o->next)
 		o = o->next;
-	if (!(o->next = objconst()))
+	if (!(o->next = objconst()) || countargs(s) != 7)
 		return (-1);
 	o = o->next;
 	o->type = 1;

@@ -23,10 +23,14 @@ void	mlx_put_color(int c, int x, int y)
 	mlx_pixel_put(g_data.mlx.mlx, g_data.mlx.win, x, y, c);
 }
 
-t_image	makeimage(void)
+t_image	makeimage(int *i, t_cam *c)
 {
 	t_image	img;
 
+	*i = 0;
+	changecords(c);
+	g_data.tmp = g_data.swidth > g_data.sheight
+		? g_data.swidth : g_data.sheight;
 	img.img = mlx_new_image(g_data.mlx.mlx, g_data.swidth, g_data.sheight);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
@@ -51,11 +55,7 @@ void	get_image(t_cam *c)
 	t_point	p;
 	t_image img;
 
-	g_data.tmp = g_data.swidth > g_data.sheight
-		? g_data.swidth : g_data.sheight;
-	img = makeimage();
-	changecords(c);
-	h = 0;
+	img = makeimage(&h, c);
 	while (h++ < g_data.sheight && !(w = 0))
 	{
 		while (w++ < g_data.swidth)
@@ -67,7 +67,10 @@ void	get_image(t_cam *c)
 			my_mlx_pixel_put(&img, w, h, checkobjects(&l));
 		}
 	}
-	mlx_put_image_to_window(g_data.mlx.mlx, g_data.mlx.win, img.img, 0, 0);
-	if (g_data.save)
+	if (!g_data.save)
+		mlx_put_image_to_window(g_data.mlx.mlx, g_data.mlx.win, img.img, 0, 0);
+	else
 		create_bmp_image(img, "file.bmp");
+	free(img.img);
+	free(img.addr);
 }

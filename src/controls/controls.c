@@ -23,11 +23,12 @@ void	mlx_start(void)
 
 int		closewin(int keycode, t_mlx *mlx)
 {
-	g_data.camcur = g_data.cams->next;
-	g_data.objcur = g_data.objects->next;
-	if (keycode == 0x81 || keycode == 0x01)
+	if (!g_data.objcur)
+		g_data.objcur = g_data.objects->next;
+	if (keycode == 53)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
+		cleanall();
 		exit(0);
 	}
 	else if (keycode == 8)
@@ -42,7 +43,7 @@ int		closewin(int keycode, t_mlx *mlx)
 	{
 		g_data.objcur = g_data.objcur->next;
 		if (!g_data.objcur)
-			g_data.objcur = g_data.objects;
+			g_data.objcur = g_data.objects->next;
 	}
 	control2(keycode);
 	return (1);

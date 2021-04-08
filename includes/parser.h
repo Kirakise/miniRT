@@ -6,7 +6,7 @@
 /*   By: rcaraway <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:47:40 by rcaraway          #+#    #+#             */
-/*   Updated: 2021/02/09 18:47:41 by rcaraway         ###   ########.fr       */
+/*   Updated: 2021/03/02 20:52:38 by rcaraway         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int		parsetriangle(char *s);
 void	readpoint(t_point *p, char **s);
 void	readvector(t_vector *p, char **s);
 void	readcolor(t_color *c, char **s);
-
+int		countargs(char *s);
 #endif
