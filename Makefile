@@ -11,7 +11,7 @@ libmlx.a:
 	cp minilibx/libmlx.a ./
 
 linux: $(OBJS)
-	$(CC) -g -lmlx  -lX11 -lXext $^ libmlx.a -o $(NAME) -lm
+	$(CC) -g -lmlx  -lX11 -lXext $^ linux.a -o $(NAME) -lm
 $(NAME): $(OBJS)
 	$(CC) -g libmlx.a -framework OpenGL -framework AppKit $^ -o $(NAME)
 %.o: %.c
