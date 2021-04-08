@@ -25,7 +25,7 @@ int		closewin(int keycode, t_mlx *mlx)
 {
 	g_data.camcur = g_data.cams->next;
 	g_data.objcur = g_data.objects->next;
-	if (keycode == 53)
+	if (keycode == 0x81 || keycode == 0x01)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
 		exit(0);

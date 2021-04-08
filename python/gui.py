@@ -15,7 +15,7 @@ def abtnclick():
 	f.write("A " + ain.get() + " 255,255,255\n")
 
 def lbtnclick():
-	f.write("l " + lin1.get() + " " + lin2.get() + " 255,255,255")
+	f.write("l " + lin1.get() + " " + lin2.get() + " 255,255,255\n")
 
 def cambtnclick():
 	f.write("c " + camin.get() + " " + camin2.get() + " 70\n")
